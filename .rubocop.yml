@@ -1,0 +1,13 @@
+# Long line is inevidable. We should and could handle them ourselves.
+Metrics/LineLength:
+  Enabled: false
+
+# We prefer indented style then aligned style.
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# We follow Rails conventions to avoid writing unneeded documentations.
+Style/Documentation:
+  Enabled: false
