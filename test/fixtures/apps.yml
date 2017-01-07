@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+qingdiet-test:
+  name: QingDiet 测试 客户端
+  client_id: <%= UUIDTools::UUID.timestamp_create %>
+  client_secret: <%= UUIDTools::UUID.random_create %>
+  redirect_uri: http://www.example.com
