@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107160815) do
+ActiveRecord::Schema.define(version: 20170107161511) do
 
   create_table "apps", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +20,21 @@ ActiveRecord::Schema.define(version: 20170107160815) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["client_id"], name: "index_apps_on_client_id", unique: true
+  end
+
+  create_table "tokens", force: :cascade do |t|
+    t.string   "uuid"
+    t.integer  "app_id"
+    t.integer  "user_id"
+    t.integer  "expires_in"
+    t.datetime "expired_at"
+    t.string   "last_called_ip"
+    t.datetime "last_called_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["app_id"], name: "index_tokens_on_app_id"
+    t.index ["user_id"], name: "index_tokens_on_user_id"
+    t.index ["uuid"], name: "index_tokens_on_uuid", unique: true
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,4 +1,6 @@
 class App < ApplicationRecord
+  has_many :tokens, dependent: :destroy
+
   validates :name, presence: true, length: { maximum: 255 }
   validates :redirect_uri, presence: true, uri: true
 
