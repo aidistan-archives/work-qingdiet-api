@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AppTest < ActiveSupport::TestCase
   setup do
-    @app = apps(:test)
+    @app = apps(:qingdiet)
   end
 
   test 'fixtures should be valid' do
@@ -29,5 +29,11 @@ class AppTest < ActiveSupport::TestCase
   test 'redirect_uri should be a valid uri' do
     @app.redirect_uri = '0://'
     assert_not @app.valid?
+  end
+
+  test 'tokens should be destroy together' do
+    token = @app.tokens.first
+    @app.destroy
+    assert_raises(ActiveRecord::RecordNotFound) { token.reload }
   end
 end
