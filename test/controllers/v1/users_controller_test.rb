@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UsersControllerTest < ActionDispatch::IntegrationTest
+class V1::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:aidistan)
   end
