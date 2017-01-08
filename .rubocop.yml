@@ -1,5 +1,9 @@
-# Long line is inevidable. We should and could handle them ourselves.
+# We should and could handle them ourselves.
 Metrics/LineLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/AbcSize:
   Enabled: false
 
 # We prefer indented style then aligned style.
@@ -10,4 +14,6 @@ Style/MultilineMethodCallIndentation:
 
 # We follow Rails conventions to avoid writing unneeded documentations.
 Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
   Enabled: false
