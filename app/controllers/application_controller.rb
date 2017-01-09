@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
       @current_user = token.user
       @current_token = token
     else
-      render status: :unauthorized
+      render body: nil, status: :unauthorized
     end
   end
 end

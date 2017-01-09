@@ -13,7 +13,12 @@ Style/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
 # We follow Rails conventions to avoid writing unneeded documentations.
-Style/Documentation:
-  Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/EmptyMethod:
+  Enabled: false
+Style/LambdaCall:
+  Exclude:
+    - 'app/views/**/*.jbuilder'

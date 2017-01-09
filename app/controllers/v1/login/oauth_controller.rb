@@ -2,7 +2,7 @@ class V1::Login::OauthController < V1::LoginController
   before_action :authenticate_app_with_http_basic, only: :access_token
 
   def authorize
-    render status: :forbidden
+    render body: nil, status: :forbidden
   end
 
   def access_token
@@ -10,19 +10,15 @@ class V1::Login::OauthController < V1::LoginController
     when 'password'
       user = User.find_by(username: params[:username])
 
-      if user && user.authenticate(params[:password])
-        token = Token.create(user: user, app: @current_app)
-        return render json: {
-          access_token: token.uuid,
-          expires_in: token.expires_in
-        }
+      unless user && user.authenticate(params[:password])
+        return render body: nil, status: :unauthorized
       end
 
-      render status: :unauthorized
+      @token = Token.create(user: user, app: @current_app)
     when 'code'
-      render status: :forbidden
+      render body: nil, status: :forbidden
     else
-      render status: :bad_request
+      render body: nil, status: :bad_request
     end
   end
 
