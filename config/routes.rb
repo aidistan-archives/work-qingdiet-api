@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   namespace :v1 do
-    namespace :oauth do
-      get  'login'
-      get  'authorize'
-      post 'access_token'
+    namespace :login do
+      get  'oauth/authorize'
+      post 'oauth/access_token'
     end
 
     resources :users, only: [:show, :update, :destroy]

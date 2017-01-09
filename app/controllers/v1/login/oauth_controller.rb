@@ -1,10 +1,5 @@
-class V1::OauthController < ApplicationController
-  skip_before_action :token_http_authenticate
-  before_action :app_http_basic_authenticate, only: :access_token
-
-  def login
-    render status: :forbidden
-  end
+class V1::Login::OauthController < V1::LoginController
+  before_action :authenticate_app_with_http_basic, only: :access_token
 
   def authorize
     render status: :forbidden
@@ -28,6 +23,20 @@ class V1::OauthController < ApplicationController
       render status: :forbidden
     else
       render status: :bad_request
+    end
+  end
+
+  private
+
+  def authenticate_app_with_http_basic
+    app = authenticate_with_http_basic do |id, secret|
+      App.find_by(client_id: id, client_secret: secret)
+    end
+
+    if app
+      @current_app = app
+    else
+      request_http_basic_authentication
     end
   end
 end

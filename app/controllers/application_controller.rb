@@ -2,21 +2,13 @@ class ApplicationController < ActionController::API
   # API application have to include it explicitly
   include ActionController::HttpAuthentication::Basic::ControllerMethods
 
-  before_action :token_http_authenticate
+  # Add action hooks
+  before_action :authenticate_access_token
 
-  def app_http_basic_authenticate
-    app = authenticate_with_http_basic do |id, secret|
-      App.find_by(client_id: id, client_secret: secret)
-    end
+  private
 
-    if app
-      @current_app = app
-    else
-      request_http_basic_authentication
-    end
-  end
-
-  def token_http_authenticate
+  # Authenticate access_token in the request
+  def authenticate_access_token
     token = Token.find_by(uuid: headers['Authorization'] || params[:access_token])
 
     if token
