@@ -15,7 +15,7 @@ class V1::UsersController < ApplicationController
   end
 
   # DELETE /users/1
-  # TODO: to pend the action for 60 days
+  # TODO: pend the deletion for 60 days
   def destroy
     @user.destroy
   end

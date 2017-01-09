@@ -2,6 +2,9 @@ require 'test_helper'
 
 class V1::Login::OauthControllerTest < ActionDispatch::IntegrationTest
   setup do
+    # NOTE: use :@_app instead of :@app to avoid a naming crashing.
+    # See https://github.com/rails/rails/issues/26835 for more info.
+    @_app = apps(:qingdiet)
     @user = users(:aidistan)
   end
 
@@ -35,12 +38,10 @@ class V1::Login::OauthControllerTest < ActionDispatch::IntegrationTest
   private
 
   def headers_with_credentials
-    # FIXME: could not assign `apps(:qingdiet)` to `@app` here due to a Rails
-    # internal conflict (https://github.com/rails/rails/issues/26835).
     {
       'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(
-        apps(:qingdiet).client_id,
-        apps(:qingdiet).client_secret
+        @_app.client_id,
+        @_app.client_secret
       )
     }
   end
