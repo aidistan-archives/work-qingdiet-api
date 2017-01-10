@@ -1,0 +1,12 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 办公室
+  consignee: 谭先生
+  province: 北京市
+  city: 海淀区
+  district: 四环到五环之间
+  town:
+  detail: 清华大学 FIT 楼
+  mobile: 18811229458
+  user: one
