@@ -2,7 +2,6 @@ class ApplicationController < ActionController::API
   # API application have to include it explicitly
   include ActionController::HttpAuthentication::Basic::ControllerMethods
 
-  # Add action hooks
   before_action :authenticate_access_token
 
   private

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'status', controller: 'root'
+
   namespace :v1 do
     namespace :login do
       get  'oauth/authorize'
