@@ -1,20 +1,17 @@
 class V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
-  # GET /users/1
   def show
   end
 
-  # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render :show
+      render :show, status: :ok, location: v1_user_url(@user)
     else
       render json: @user.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /users/1
   # TODO: pend the deletion for 60 days
   def destroy
     @user.destroy

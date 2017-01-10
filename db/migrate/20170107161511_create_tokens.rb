@@ -2,8 +2,8 @@ class CreateTokens < ActiveRecord::Migration[5.0]
   def change
     create_table :tokens do |t|
       t.string :uuid
-      t.references :app
-      t.references :user
+      t.references :app, foreign_key: true
+      t.references :user, foreign_key: true
       t.integer :expires_in
       t.datetime :expired_at
       t.string :last_called_ip

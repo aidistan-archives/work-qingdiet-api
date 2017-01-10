@@ -1,0 +1,8 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  age: 25
+  height: 180
+  weight: 75.5
+  activity_level: 1.2
+  user: aidistan

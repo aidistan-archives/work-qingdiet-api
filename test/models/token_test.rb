@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class TokenTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'fixtures should be valid' do
+    Token.all.each do |token|
+      assert token.valid?
+    end
+  end
 end
