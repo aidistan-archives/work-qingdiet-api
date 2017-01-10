@@ -11,12 +11,9 @@ class V1::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :unauthorized
   end
 
-  test 'should show me' do
+  test 'should show user' do
     get v1_user_url('me', access_token: @access_token), as: :json
     assert_response :success
-  end
-
-  test 'should show user' do
     get v1_user_url(@user, access_token: @access_token), as: :json
     assert_response :success
   end

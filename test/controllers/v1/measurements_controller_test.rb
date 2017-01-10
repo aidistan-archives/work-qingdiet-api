@@ -28,6 +28,8 @@ class V1::MeasurementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show measurement' do
+    get v1_user_measurement_url(@user, 'latest', access_token: @access_token), as: :json
+    assert_response :success
     get v1_user_measurement_url(@user, @measurement, access_token: @access_token), as: :json
     assert_response :success
   end

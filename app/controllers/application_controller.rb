@@ -19,4 +19,12 @@ class ApplicationController < ActionController::API
       render body: nil, status: :unauthorized
     end
   end
+
+  def set_user
+    @user =
+      case (user_id = params[:user_id] || params[:id])
+      when 'me' then @current_user
+      else User.find(user_id)
+      end
+  end
 end

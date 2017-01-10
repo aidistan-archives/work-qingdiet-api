@@ -3,7 +3,7 @@ class V1::MeasurementsController < ApplicationController
   before_action :set_measurement, only: [:show, :destroy]
 
   def index
-    @measurements = @user.measurements
+    @measurements = @user.measurements.order(created_at: :desc)
   end
 
   def show
@@ -26,13 +26,12 @@ class V1::MeasurementsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_user
-    @user = params[:user_id] == 'me' ? @current_user : User.find(params[:user_id])
-  end
-
-  # Use callbacks to share common setup or constraints between actions.
   def set_measurement
-    @measurement = Measurement.find(params[:id])
+    @measurement =
+      case params[:id]
+      when 'latest' then @user.measurements.order(created_at: :desc).limit(1).take
+      else Measurement.find(params[:id])
+      end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
