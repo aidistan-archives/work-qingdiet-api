@@ -3,6 +3,6 @@
 one:
   age: 25
   height: 180
-  weight: 75.5
+  weight: 75
   activity_level: 1.2
-  user: aidistan
+  user: one

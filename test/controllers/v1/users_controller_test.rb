@@ -2,8 +2,8 @@ require 'test_helper'
 
 class V1::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:aidistan)
-    @access_token = tokens(:alibaba).uuid
+    @user = users(:one)
+    @access_token = @user.tokens.first.uuid
   end
 
   test 'should check access_token' do
@@ -22,7 +22,7 @@ class V1::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update user' do
-    patch v1_user_url(@user, access_token: @access_token), params: { user: {} }, as: :json
+    patch v1_user_url(@user, access_token: @access_token), as: :json
     assert_response 200
   end
 
@@ -30,7 +30,6 @@ class V1::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference('User.count', -1) do
       delete v1_user_url(@user, access_token: @access_token), as: :json
     end
-
     assert_response 204
   end
 end

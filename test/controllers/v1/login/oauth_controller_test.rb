@@ -2,10 +2,10 @@ require 'test_helper'
 
 class V1::Login::OauthControllerTest < ActionDispatch::IntegrationTest
   setup do
-    # NOTE: use :@_app instead of :@app to avoid a naming crashing.
+    # NOTE: use :@_app instead of :@app to avoid a naming crash.
     # See https://github.com/rails/rails/issues/26835 for more info.
-    @_app = apps(:qingdiet)
-    @user = users(:aidistan)
+    @_app = apps(:one)
+    @user = users(:one)
   end
 
   test 'should not authorize' do
@@ -19,7 +19,9 @@ class V1::Login::OauthControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should reject access_token without grant_type' do
-    post v1_login_oauth_access_token_url, headers: headers_with_credentials, as: :json
+    post v1_login_oauth_access_token_url,
+      headers: headers_with_credentials,
+      as: :json
     assert_response :bad_request
   end
 

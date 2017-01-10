@@ -2,8 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   setup do
-    @user = users(:aidistan)
-    @app = apps(:qingdiet)
+    @user = users(:one)
   end
 
   test 'fixtures should be valid' do

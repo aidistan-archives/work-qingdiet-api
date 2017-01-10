@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AppTest < ActiveSupport::TestCase
   setup do
-    @app = apps(:qingdiet)
+    @app = apps(:one)
   end
 
   test 'fixtures should be valid' do

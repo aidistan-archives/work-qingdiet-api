@@ -13,7 +13,7 @@ class V1::MeasurementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create measurement' do
-    assert_difference('Measurement.count') do
+    assert_difference('@user.measurements.count') do
       post v1_user_measurements_url(@user, access_token: @access_token), params: {
         measurement: {
           age: @measurement.age,
@@ -36,7 +36,6 @@ class V1::MeasurementsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Measurement.count', -1) do
       delete v1_user_measurement_url(@user, @measurement, access_token: @access_token), as: :json
     end
-
     assert_response 204
   end
 end

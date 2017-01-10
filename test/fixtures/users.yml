@@ -1,5 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-aidistan:
-  username: aidistan
+one:
+  username: one
   password_digest: <%= BCrypt::Password.create('Pa55word') %>

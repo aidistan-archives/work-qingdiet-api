@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-alibaba:
-  uuid: alibaba
-  app: qingdiet
-  user: aidistan
+one:
+  uuid: one
+  app: one
+  user: one
