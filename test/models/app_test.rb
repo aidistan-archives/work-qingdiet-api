@@ -32,8 +32,6 @@ class AppTest < ActiveSupport::TestCase
   end
 
   test 'tokens should be destroy together' do
-    token = @app.tokens.first
-    @app.destroy
-    assert_raises(ActiveRecord::RecordNotFound) { token.reload }
+    assert_difference('Token.count', -1) { @app.destroy }
   end
 end

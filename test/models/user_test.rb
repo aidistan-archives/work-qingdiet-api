@@ -16,10 +16,9 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
   end
 
-  # TODO: test more belongings
-  test 'belongings should be destroy together' do
-    token = @user.tokens.first
-    @user.destroy
-    assert_raises(ActiveRecord::RecordNotFound) { token.reload }
+  [:tokens, :addresses, :measurements].each do |belongings|
+    test "#{belongings} should be dstroy together" do
+      assert_difference("#{belongings.to_s.singularize.capitalize}.count", -1) { @user.destroy }
+    end
   end
 end
