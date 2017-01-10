@@ -1,4 +1,5 @@
-class V1::Login::OauthController < V1::LoginController
+class V1::Login::OauthController < ApplicationController
+  skip_before_action :authenticate_access_token
   before_action :authenticate_app_with_http_basic, only: :access_token
 
   def authorize
