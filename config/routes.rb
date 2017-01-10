@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:show, :update, :destroy] do
+      resources :addresses
       resources :measurements, except: :update
     end
   end

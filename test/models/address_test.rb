@@ -26,6 +26,11 @@ class AddressTest < ActiveSupport::TestCase
     assert_not @address.valid?
   end
 
+  test 'district should be present' do
+    @address.district = ' '
+    assert_not @address.valid?
+  end
+
   test 'detail should be present' do
     @address.detail = ' '
     assert_not @address.valid?

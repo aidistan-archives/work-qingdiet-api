@@ -16,7 +16,8 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
   end
 
-  test 'tokens should be destroy together' do
+  # TODO: test more belongings
+  test 'belongings should be destroy together' do
     token = @user.tokens.first
     @user.destroy
     assert_raises(ActiveRecord::RecordNotFound) { token.reload }
