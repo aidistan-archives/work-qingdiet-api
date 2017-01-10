@@ -15,6 +15,11 @@ class ApplicationController < ActionController::API
       @current_app = token.app
       @current_user = token.user
       @current_token = token
+
+      token.update_attributes(
+        last_used_ip: request.remote_ip,
+        last_used_at: Time.now
+      )
     else
       render body: nil, status: :unauthorized
     end

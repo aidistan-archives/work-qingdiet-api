@@ -3,15 +3,18 @@ class CreateAddresses < ActiveRecord::Migration[5.0]
     create_table :addresses do |t|
       t.string :name
       t.string :consignee
+      t.string :mobile
+
       t.string :province
       t.string :city
       t.string :district
       t.string :town
       t.string :detail
-      t.string :mobile
-      t.references :user, foreign_key: true
 
+      t.datetime :last_used_at
       t.timestamps
+
+      t.references :user, foreign_key: true
     end
   end
 end

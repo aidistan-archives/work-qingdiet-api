@@ -15,15 +15,16 @@ ActiveRecord::Schema.define(version: 20170110085109) do
   create_table "addresses", force: :cascade do |t|
     t.string   "name"
     t.string   "consignee"
+    t.string   "mobile"
     t.string   "province"
     t.string   "city"
     t.string   "district"
     t.string   "town"
     t.string   "detail"
-    t.string   "mobile"
+    t.datetime "last_used_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -42,22 +43,22 @@ ActiveRecord::Schema.define(version: 20170110085109) do
     t.float    "height"
     t.float    "weight"
     t.float    "activity_level"
-    t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "user_id"
     t.index ["user_id"], name: "index_measurements_on_user_id"
   end
 
   create_table "tokens", force: :cascade do |t|
     t.string   "uuid"
-    t.integer  "app_id"
-    t.integer  "user_id"
     t.integer  "expires_in"
     t.datetime "expired_at"
-    t.string   "last_called_ip"
-    t.datetime "last_called_at"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "last_used_ip"
+    t.datetime "last_used_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "app_id"
+    t.integer  "user_id"
     t.index ["app_id"], name: "index_tokens_on_app_id"
     t.index ["user_id"], name: "index_tokens_on_user_id"
     t.index ["uuid"], name: "index_tokens_on_uuid", unique: true
