@@ -15,12 +15,10 @@ class V1::MeasurementsControllerTest < ActionDispatch::IntegrationTest
   test 'should create measurement' do
     assert_difference('@user.measurements.count') do
       post v1_user_measurements_url(@user, access_token: @access_token), params: {
-        measurement: {
-          age: @measurement.age,
-          height: @measurement.height,
-          weight: @measurement.weight,
-          activity_level: @measurement.activity_level
-        }
+        age: @measurement.age,
+        height: @measurement.height,
+        weight: @measurement.weight,
+        activity_level: @measurement.activity_level
       }, as: :json
     end
 

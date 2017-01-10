@@ -14,18 +14,15 @@ class V1::AddressesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create address' do
     assert_difference('@user.addresses.count') do
-      post v1_user_addresses_url(@user, access_token: @access_token),
-        params: { address: {
-          consignee: @address.consignee,
-          mobile: @address.mobile,
-          province: @address.province,
-          city: @address.city,
-          district: @address.district,
-          detail: @address.detail
-        } },
-        as: :json
+      post v1_user_addresses_url(@user, access_token: @access_token), params: {
+        consignee: @address.consignee,
+        mobile: @address.mobile,
+        province: @address.province,
+        city: @address.city,
+        district: @address.district,
+        detail: @address.detail
+      }, as: :json
     end
-
     assert_response 201
   end
 
@@ -34,18 +31,17 @@ class V1::AddressesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # TODO: remove the outside `address`
   test 'should update address' do
     patch v1_user_address_url(@user, @address, access_token: @access_token),
-      params: { address: { city: @address.city, consignee: @address.consignee, detail: @address.detail, district: @address.district, mobile: @address.mobile, name: @address.name, province: @address.province, town: @address.town, user_id: @address.user_id } }, as: :json
+      params: { name: 'name' }, as: :json
     assert_response 200
+    assert_equal 'name', JSON.parse(response.body)['name']
   end
 
   test 'should destroy address' do
     assert_difference('@user.addresses.count', -1) do
       delete v1_user_address_url(@user, @address, access_token: @access_token), as: :json
     end
-
     assert_response 204
   end
 end
