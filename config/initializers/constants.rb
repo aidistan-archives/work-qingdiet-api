@@ -1,6 +1,6 @@
 module QingDiet
   # Current version
-  VERSION = '0.1.0'.freeze
+  VERSION = '0.2.0'.freeze
   VERNAME = 'Onion'.freeze
-  VERTIME = '2017-01-10'.freeze
+  VERTIME = '2017-01-11'.freeze
 end
