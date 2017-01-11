@@ -37,6 +37,6 @@ class AppTest < ActiveSupport::TestCase
   end
 
   test 'tokens should be destroy together' do
-    assert_difference('Token.count', -2) { @app.destroy }
+    assert_difference('Token.count', -3) { @app.destroy }
   end
 end

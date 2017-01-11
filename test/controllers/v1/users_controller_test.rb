@@ -20,6 +20,17 @@ class V1::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :unauthorized
   end
 
+  test 'should check authorization' do
+    other_access_token = users(:two).tokens.where(kind: 'access').first.uuid
+    skip('We shall check authorization later')
+    get v1_user_url(@user, access_token: other_access_token), as: :json
+    assert_response :unauthorized
+    patch v1_user_url(@user, access_token: other_access_token), as: :json
+    assert_response :unauthorized
+    delete v1_user_url(@user, access_token: other_access_token), as: :json
+    assert_response :unauthorized
+  end
+
   test 'should show user' do
     get v1_user_url('me', access_token: @access_token), as: :json
     assert_response :success

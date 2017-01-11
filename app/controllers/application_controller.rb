@@ -1,8 +1,17 @@
 class ApplicationController < ActionController::API
-  # API application have to include it explicitly
+  # Include for OAuth authentication
   include ActionController::HttpAuthentication::Basic::ControllerMethods
+  # # Include for authorization
+  # include Pundit
 
   before_action :authenticate_access_token
+
+  # rescue_from(Pundit::NotAuthorizedError) { head :unauthorized }
+
+  # # Use current_token instead of current_user
+  # def pundit_user
+  #   @current_token
+  # end
 
   private
 

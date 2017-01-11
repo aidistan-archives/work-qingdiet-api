@@ -3,3 +3,7 @@
 one:
   username: one
   password_digest: <%= BCrypt::Password.create('Pa55word') %>
+
+two:
+  username: two
+  password_digest: <%= BCrypt::Password.create('Pa55word') %>
