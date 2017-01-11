@@ -26,8 +26,13 @@ class AppTest < ActiveSupport::TestCase
     assert_not @app.valid?
   end
 
-  test 'redirect_uri should be a valid uri' do
+  test 'redirect_uri should be valid' do
     @app.redirect_uri = '0://'
+    assert_not @app.valid?
+  end
+
+  test 'redirect_uri should has no query' do
+    @app.redirect_uri = 'http://www.example.com?query'
     assert_not @app.valid?
   end
 
