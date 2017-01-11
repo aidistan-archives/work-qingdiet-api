@@ -5,6 +5,10 @@ Metrics/MethodLength:
   Enabled: false
 Metrics/AbcSize:
   Enabled: false
+Style/AlignHash:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
 
 # We prefer indented style then aligned style.
 Style/AlignParameters:
