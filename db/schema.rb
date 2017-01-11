@@ -51,12 +51,13 @@ ActiveRecord::Schema.define(version: 20170110085109) do
 
   create_table "tokens", force: :cascade do |t|
     t.string   "uuid"
+    t.integer  "kind",         default: 0
     t.integer  "expires_in"
     t.datetime "expired_at"
     t.string   "last_used_ip"
     t.datetime "last_used_at"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "app_id"
     t.integer  "user_id"
     t.index ["app_id"], name: "index_tokens_on_app_id"

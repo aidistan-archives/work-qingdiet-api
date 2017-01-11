@@ -1,6 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  uuid: one
+access:
+  uuid: access
+  kind: access
+  app: one
+  user: one
+
+code:
+  uuid: code
+  kind: code
   app: one
   user: one

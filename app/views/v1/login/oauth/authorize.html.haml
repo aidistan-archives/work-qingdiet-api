@@ -1,0 +1,15 @@
+- provide :title, 'Login - QingDiet'
+
+%h1= "Login #{@app.name} with your QingDiet account"
+= form_for :credentials, url: v1_login_oauth_authorize_path, authenticity_token: false do |f|
+  %p= @flash if @flash
+
+  - [:grant_type, :client_id, :state].each do |param|
+    = hidden_field_tag param, params[param]
+
+  = f.label :username, 'Username'
+  = f.text_field :username, required: true
+  = f.label :password, 'Password'
+  = f.password_field :password, required: true
+
+  = f.submit 'Login'

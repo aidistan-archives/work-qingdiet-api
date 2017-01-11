@@ -16,9 +16,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
   end
 
-  [:tokens, :addresses, :measurements].each do |belongings|
+  { tokens: -2, addresses: -1, measurements: -1 }.each do |belongings, change|
     test "#{belongings} should be dstroy together" do
-      assert_difference("#{belongings.to_s.singularize.capitalize}.count", -1) { @user.destroy }
+      belonging_model_name = belongings.to_s.singularize.capitalize
+      assert_difference("#{belonging_model_name}.count", change) { @user.destroy }
     end
   end
 end
