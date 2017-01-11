@@ -3,11 +3,20 @@ require 'test_helper'
 class V1::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
-    @access_token = @user.tokens.first.uuid
+    @access_token = @user.tokens.where(kind: 'access').first.uuid
   end
 
-  test 'should check access_token' do
+  test 'should reject request without access_token' do
     get v1_user_url(@user), as: :json
+    assert_response :unauthorized
+  end
+
+  test 'should reject request with expired access_token' do
+    Token.find_by(uuid: @access_token).update_attribute(:expires_at, Time.now - 1)
+
+    assert_difference('Token.count', -1) do
+      get v1_user_url(@user, access_token: @access_token), as: :json
+    end
     assert_response :unauthorized
   end
 

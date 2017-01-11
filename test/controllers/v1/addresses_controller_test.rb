@@ -4,7 +4,7 @@ class V1::AddressesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @address = addresses(:one)
     @user = @address.user
-    @access_token = @user.tokens.first.uuid
+    @access_token = @user.tokens.where(kind: 'access').first.uuid
   end
 
   test 'should get index' do

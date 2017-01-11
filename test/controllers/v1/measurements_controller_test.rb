@@ -4,7 +4,7 @@ class V1::MeasurementsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @measurement = measurements(:one)
     @user = @measurement.user
-    @access_token = @user.tokens.first.uuid
+    @access_token = @user.tokens.where(kind: 'access').first.uuid
   end
 
   test 'should get index' do

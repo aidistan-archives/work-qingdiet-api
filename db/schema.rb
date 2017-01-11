@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20170110085109) do
     t.string   "uuid"
     t.integer  "kind",         default: 0
     t.integer  "expires_in"
-    t.datetime "expired_at"
+    t.datetime "expires_at"
     t.string   "last_used_ip"
     t.datetime "last_used_at"
     t.datetime "created_at",               null: false

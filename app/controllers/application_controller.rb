@@ -8,15 +8,17 @@ class ApplicationController < ActionController::API
 
   # Authenticate access_token in the request
   def authenticate_access_token
-    token = Token.find_by(uuid: headers['Authorization'] || params[:access_token])
+    token = Token.find_by(
+      uuid: headers['Authorization'] || params[:access_token],
+      kind: 'access'
+    )
 
-    # TODO: check type and expiration
-    if token
+    if token && !token.expired?
       @current_app = token.app
       @current_user = token.user
       @current_token = token
 
-      token.mark_used(ip: request.remote_ip)
+      token.update_attributes(last_used_at: Time.now, last_used_ip: request.remote_ip)
     else
       head :unauthorized
     end

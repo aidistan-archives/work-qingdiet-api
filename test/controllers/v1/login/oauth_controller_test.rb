@@ -31,6 +31,19 @@ class V1::Login::OauthControllerTest < ActionDispatch::IntegrationTest
     assert_response :bad_request
   end
 
+  test 'should reject access_token with exipred code_token' do
+    token = @user.tokens.where(kind: 'code').first
+    token.update_attribute(:expires_at, Time.now - 1)
+
+    post v1_login_oauth_access_token_url, as: :json,
+      headers: headers_with_credentials,
+      params: {
+        grant_type: 'authorization_code',
+        code: token.uuid
+      }
+    assert_response :unauthorized
+  end
+
   test 'should support authorization code grant' do
     post v1_login_oauth_authorize_url, params: {
       grant_type: 'code',

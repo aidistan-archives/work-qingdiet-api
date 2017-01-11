@@ -29,12 +29,11 @@ class V1::Login::OauthController < ApplicationController
       end
 
     when 'authorization_code'
-      token = Token.find_by(uuid: params[:code])
+      token = Token.find_by(uuid: params[:code], kind: 'code', app: @app)
 
-      # TODO: check whether expired
-      if token && token.code_token? && token.app == @app
-        render json: Token.create(app: @app, user: token.user).to_access_token
+      if token && !token.expired?
         token.destroy
+        render json: Token.create(app: @app, user: token.user).to_access_token
       else
         head :unauthorized
       end
