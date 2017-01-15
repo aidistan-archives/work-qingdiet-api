@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110085109) do
+ActiveRecord::Schema.define(version: 20170115143913) do
+
+  create_table "acquirements", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "combo_id"
+    t.integer  "requirement_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["combo_id"], name: "index_acquirements_on_combo_id", unique: true
+    t.index ["requirement_id"], name: "index_acquirements_on_requirement_id", unique: true
+    t.index ["user_id"], name: "index_acquirements_on_user_id"
+  end
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name"
@@ -38,6 +49,31 @@ ActiveRecord::Schema.define(version: 20170110085109) do
     t.index ["client_id"], name: "index_apps_on_client_id", unique: true
   end
 
+  create_table "combo_items", force: :cascade do |t|
+    t.integer  "dish_id"
+    t.integer  "combo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["combo_id"], name: "index_combo_items_on_combo_id"
+    t.index ["dish_id"], name: "index_combo_items_on_dish_id"
+  end
+
+  create_table "combos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "order_id"
+    t.integer  "requirement_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["order_id"], name: "index_combos_on_order_id"
+    t.index ["requirement_id"], name: "index_combos_on_requirement_id", unique: true
+    t.index ["user_id"], name: "index_combos_on_user_id"
+  end
+
+  create_table "dishes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "measurements", force: :cascade do |t|
     t.float    "age"
     t.float    "height"
@@ -47,6 +83,25 @@ ActiveRecord::Schema.define(version: 20170110085109) do
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_measurements_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_orders_on_address_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "requirements", force: :cascade do |t|
+    t.string   "purpose"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "user_id"
+    t.integer  "measurement_id"
+    t.index ["measurement_id"], name: "index_requirements_on_measurement_id"
+    t.index ["user_id"], name: "index_requirements_on_user_id"
   end
 
   create_table "tokens", force: :cascade do |t|

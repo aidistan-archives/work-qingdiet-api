@@ -1,5 +1,6 @@
 class Address < ApplicationRecord
   belongs_to :user
+  has_many :orders, dependent: :restrict_with_exception
 
   validates :consignee, presence: true
   validates :mobile, presence: true, mobile: true
