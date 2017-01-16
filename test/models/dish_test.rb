@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class DishTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @dish = dishes(:one)
+  end
+
+  test_fixtures
+  test_dependent_associations(exception: ComboItem)
 end

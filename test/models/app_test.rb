@@ -5,11 +5,8 @@ class AppTest < ActiveSupport::TestCase
     @app = apps(:one)
   end
 
-  test 'fixtures should be valid' do
-    App.all.each do |app|
-      assert app.valid?
-    end
-  end
+  test_fixtures
+  test_dependent_associations(destroy: Token)
 
   test 'name should be present' do
     @app.name = ' '
@@ -34,9 +31,5 @@ class AppTest < ActiveSupport::TestCase
   test 'redirect_uri should has no query' do
     @app.redirect_uri = 'http://www.example.com?query'
     assert_not @app.valid?
-  end
-
-  test 'tokens should be destroy together' do
-    assert_difference('Token.count', -3) { @app.destroy }
   end
 end

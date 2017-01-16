@@ -5,11 +5,8 @@ class MeasurementTest < ActiveSupport::TestCase
     @measurement = measurements(:one)
   end
 
-  test 'fixtures should be valid' do
-    Measurement.all.each do |measurement|
-      assert measurement.valid?
-    end
-  end
+  test_fixtures
+  test_dependent_associations(exception: Requirement)
 
   test 'age should be greater than 0' do
     @measurement.age = 0

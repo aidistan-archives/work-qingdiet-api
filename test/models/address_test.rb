@@ -5,11 +5,8 @@ class AddressTest < ActiveSupport::TestCase
     @address = addresses(:one)
   end
 
-  test 'fixtures should be valid' do
-    Address.all.each do |address|
-      assert address.valid?
-    end
-  end
+  test_fixtures
+  test_dependent_associations(exception: Order)
 
   test 'consignee should be present' do
     @address.consignee = ' '
