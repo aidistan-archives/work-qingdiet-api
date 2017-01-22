@@ -18,6 +18,11 @@ class AppTest < ActiveSupport::TestCase
     assert_not @app.valid?
   end
 
+  test 'level should be present' do
+    @app.level = nil
+    assert_not @app.valid?
+  end
+
   test 'redirect_uri should be present' do
     @app.redirect_uri = ' '
     assert_not @app.valid?
@@ -31,5 +36,11 @@ class AppTest < ActiveSupport::TestCase
   test 'redirect_uri should has no query' do
     @app.redirect_uri = 'http://www.example.com?query'
     assert_not @app.valid?
+  end
+
+  test 'invalid tokens should be destroyed when level changed' do
+    assert_difference('Token.where("level > 0", app: @app).count', -1) do
+      @app.update_attribute(:level, 0)
+    end
   end
 end

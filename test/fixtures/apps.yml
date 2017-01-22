@@ -2,6 +2,14 @@
 
 one:
   name: One
+  level: super
   client_id: client_id
   client_secret: client_secret
+  redirect_uri: http://www.example.com
+
+two:
+  name: Two
+  level: standard
+  client_id: client_id_2
+  client_secret: client_secret_2
   redirect_uri: http://www.example.com

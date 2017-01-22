@@ -3,17 +3,20 @@
 one:
   uuid: one
   kind: access
+  level: super
   app: one
   user: one
 
 two:
   uuid: two
   kind: code
+  level: standard
   app: one
   user: one
 
 three:
   uuid: three
   kind: access
-  app: one
+  level: standard
+  app: two
   user: two

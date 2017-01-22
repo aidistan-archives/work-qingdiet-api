@@ -3,6 +3,7 @@ class CreateTokens < ActiveRecord::Migration[5.0]
     create_table :tokens do |t|
       t.string :uuid
       t.integer :kind, default: 0
+      t.integer :level
 
       t.integer :expires_in
       t.datetime :expires_at

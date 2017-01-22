@@ -23,7 +23,7 @@ class V1::Login::OauthController < ApplicationController
       user = User.find_by(username: params[:username])
 
       if user && user.authenticate(params[:password])
-        render json: user.tokens.create(app: @app).to_access_token
+        render json: user.tokens.create(app: @app, level: params[:level]).to_access_token
       else
         head :unauthorized
       end
@@ -33,7 +33,7 @@ class V1::Login::OauthController < ApplicationController
 
       if token && !token.expired?
         token.destroy
-        render json: Token.create(app: @app, user: token.user).to_access_token
+        render json: Token.create(app: @app, level: token.level, user: token.user).to_access_token
       else
         head :unauthorized
       end
@@ -58,9 +58,9 @@ class V1::Login::OauthController < ApplicationController
     if user && user.authenticate(params[:credentials][:password])
       @token =
         if params[:grant_type] == 'code'
-          user.tokens.create(app: @app, kind: 'code', expires_in: 10.minutes)
+          user.tokens.create(app: @app, kind: 'code', level: params[:level], expires_in: 10.minutes)
         else
-          user.tokens.create(app: @app)
+          user.tokens.create(app: @app, level: params[:level])
         end
     end
   end

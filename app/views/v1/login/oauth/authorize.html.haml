@@ -6,6 +6,7 @@
 
   - [:grant_type, :client_id, :state].each do |param|
     = hidden_field_tag param, params[param]
+  = hidden_field_tag :level, @app.level
 
   = f.label :username, 'Username'
   = f.text_field :username, required: true

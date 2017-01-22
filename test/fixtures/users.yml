@@ -2,8 +2,10 @@
 
 one:
   username: one
+  level: super
   password_digest: <%= BCrypt::Password.create('Pa55word') %>
 
 two:
   username: two
+  level: standard
   password_digest: <%= BCrypt::Password.create('Pa55word') %>
