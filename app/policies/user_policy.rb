@@ -1,19 +1,21 @@
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      scope = super
+
+      if token.super_level?
+        scope
+      else
+        raise Pundit::NotAuthorizedError
+      end
     end
   end
 
   def show?
-    @record == @user
+    token.super_level? || record == user
   end
 
   def update?
-    @record == @user
-  end
-
-  def destroy?
-    @record == @user
+    token.super_level? || record == user
   end
 end

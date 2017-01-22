@@ -1,8 +1,15 @@
 class V1::UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: :index
+
+  def index
+    @users = policy_scope(User)
+  end
 
   def show
   end
+
+  # def create
+  # end
 
   def update
     if @user.update(user_params)
@@ -12,12 +19,15 @@ class V1::UsersController < ApplicationController
     end
   end
 
-  # TODO: pend the deletion for 60 days
-  def destroy
-    @user.destroy
-  end
+  # def destroy
+  #   @user.destroy
+  # end
 
   private
+
+  def set_user
+    authorize @user = params[:id] == 'me' ? current_user : User.find(params[:id])
+  end
 
   # Only allow a trusted parameter "white list" through.
   def user_params

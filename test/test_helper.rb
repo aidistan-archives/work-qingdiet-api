@@ -48,4 +48,14 @@ class ActiveSupport::TestCase
       yield if block
     end
   end
+
+  # Setup contexts for policy tests
+  def setup_context
+    token = tokens(:one)
+    @user = token.user
+    @context = [token.app, token.user, token]
+    token = tokens(:two)
+    @other_user = token.user
+    @other_context = [token.app, token.user, token]
+  end
 end

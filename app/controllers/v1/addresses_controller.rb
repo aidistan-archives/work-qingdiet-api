@@ -1,19 +1,18 @@
 class V1::AddressesController < ApplicationController
-  before_action :set_user
   before_action :set_address, only: [:show, :update, :destroy]
 
   def index
-    @addresses = @user.addresses.order(last_used_at: :desc)
+    @addresses = policy_scope(Address).order(last_used_at: :desc)
   end
 
   def show
   end
 
   def create
-    @address = @user.addresses.create(address_params)
+    authorize @address = User.find(params[:user_id] || current_user.id).addresses.build(address_params)
 
     if @address.save
-      render :show, status: :created, location: v1_user_address_url(@user, @address)
+      render :show, status: :created
     else
       render json: @address.errors, status: :unprocessable_entity
     end
@@ -21,7 +20,7 @@ class V1::AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      render :show, status: :ok, location: v1_user_address_url(@user, @address)
+      render :show, status: :ok
     else
       render json: @address.errors, status: :unprocessable_entity
     end
@@ -35,7 +34,7 @@ class V1::AddressesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_address
-    @address = Address.find(params[:id])
+    authorize @address = Address.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

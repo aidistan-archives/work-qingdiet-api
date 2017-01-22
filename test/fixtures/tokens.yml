@@ -7,15 +7,15 @@ one:
   app: one
   user: one
 
-two:
-  uuid: two
+one_code:
+  uuid: one_code
   kind: code
   level: standard
   app: one
   user: one
 
-three:
-  uuid: three
+two:
+  uuid: two
   kind: access
   level: standard
   app: two

@@ -7,35 +7,44 @@ class V1::MeasurementsControllerTest < ActionDispatch::IntegrationTest
     @access_token = @user.tokens.where(kind: 'access').first.uuid
   end
 
-  test 'should get index' do
-    get v1_user_measurements_url(@user, access_token: @access_token), as: :json
+  test 'should index measurements' do
+    get v1_measurements_url(access_token: @access_token), as: :json
+    assert_response :success
+  end
+
+  test 'should show measurement' do
+    get v1_measurement_url(@user, 'latest', access_token: @access_token), as: :json
+    assert_response :success
+
+    get v1_measurement_url(@user, @measurement, access_token: @access_token), as: :json
     assert_response :success
   end
 
   test 'should create measurement' do
-    assert_difference('@user.measurements.count') do
-      post v1_user_measurements_url(@user, access_token: @access_token), params: {
-        age: @measurement.age,
-        height: @measurement.height,
-        weight: @measurement.weight,
-        activity_level: @measurement.activity_level
-      }, as: :json
-    end
+    measurement_params = {
+      age: @measurement.age,
+      height: @measurement.height,
+      weight: @measurement.weight,
+      activity_level: @measurement.activity_level
+    }
 
-    assert_response 201
+    assert_difference('@user.measurements.count') do
+      post v1_measurements_url(access_token: @access_token), as: :json,
+        params: measurement_params.merge(user_id: @user.id)
+    end
+    assert_response :created
   end
 
-  test 'should show measurement' do
-    get v1_user_measurement_url(@user, 'latest', access_token: @access_token), as: :json
+  test 'should update measurement' do
+    patch v1_measurement_url(@measurement, access_token: @access_token),
+      params: { age: 26 }, as: :json
     assert_response :success
-    get v1_user_measurement_url(@user, @measurement, access_token: @access_token), as: :json
-    assert_response :success
+    assert_equal 26, JSON.parse(response.body)['age']
   end
 
   test 'should destroy measurement' do
-    assert_difference('Measurement.count', -1) do
-      delete v1_user_measurement_url(@user, @measurement, access_token: @access_token), as: :json
-    end
-    assert_response 204
+    Requirement.where(measurement: @measurement).destroy_all
+    delete v1_measurement_url(@measurement, access_token: @access_token), as: :json
+    assert_response :no_content
   end
 end

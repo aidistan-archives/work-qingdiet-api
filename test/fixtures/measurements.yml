@@ -6,3 +6,10 @@ one:
   weight: 75
   activity_level: 1.2
   user: one
+
+two:
+  age: 32
+  height: 1162
+  weight: 56
+  activity_level: 1.8
+  user: two

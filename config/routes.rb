@@ -6,10 +6,9 @@ Rails.application.routes.draw do
       post 'oauth/access_token'
     end
 
-    resources :users, only: [:show, :update, :destroy] do
-      resources :addresses
-      resources :measurements, except: :update
-    end
+    resources :users, except: [:create, :destroy]
+    resources :addresses
+    resources :measurements
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -7,41 +7,43 @@ class V1::AddressesControllerTest < ActionDispatch::IntegrationTest
     @access_token = @user.tokens.where(kind: 'access').first.uuid
   end
 
-  test 'should get index' do
-    get v1_user_addresses_url(@user, access_token: @access_token), as: :json
+  test 'should index addresses' do
+    get v1_addresses_url(access_token: @access_token), as: :json
+    assert_response :success
+  end
+
+  test 'should show address' do
+    get v1_address_url(@address, access_token: @access_token), as: :json
     assert_response :success
   end
 
   test 'should create address' do
-    assert_difference('@user.addresses.count') do
-      post v1_user_addresses_url(@user, access_token: @access_token), params: {
-        consignee: @address.consignee,
-        mobile: @address.mobile,
-        province: @address.province,
-        city: @address.city,
-        district: @address.district,
-        detail: @address.detail
-      }, as: :json
-    end
-    assert_response 201
-  end
+    address_params = {
+      consignee: @address.consignee,
+      mobile: @address.mobile,
+      province: @address.province,
+      city: @address.city,
+      district: @address.district,
+      detail: @address.detail
+    }
 
-  test 'should show address' do
-    get v1_user_address_url(@user, @address, access_token: @access_token), as: :json
-    assert_response :success
+    assert_difference('@user.addresses.count') do
+      post v1_addresses_url(access_token: @access_token), as: :json,
+        params: address_params.merge(user_id: @user.id)
+    end
+    assert_response :created
   end
 
   test 'should update address' do
-    patch v1_user_address_url(@user, @address, access_token: @access_token),
+    patch v1_address_url(@address, access_token: @access_token),
       params: { name: 'name' }, as: :json
-    assert_response 200
+    assert_response :success
     assert_equal 'name', JSON.parse(response.body)['name']
   end
 
   test 'should destroy address' do
-    assert_difference('@user.addresses.count', -1) do
-      delete v1_user_address_url(@user, @address, access_token: @access_token), as: :json
-    end
-    assert_response 204
+    Order.where(address: @address).destroy_all
+    delete v1_address_url(@address, access_token: @access_token), as: :json
+    assert_response :no_content
   end
 end

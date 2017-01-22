@@ -1,19 +1,26 @@
 class V1::MeasurementsController < ApplicationController
-  before_action :set_user
-  before_action :set_measurement, only: [:show, :destroy]
+  before_action :set_measurement, only: [:show, :update, :destroy]
 
   def index
-    @measurements = @user.measurements.order(created_at: :desc)
+    @measurements = policy_scope(Measurement).order(created_at: :desc)
   end
 
   def show
   end
 
   def create
-    @measurement = @user.measurements.create(measurement_params)
+    @measurement = User.find(params[:user_id] || current_user.id).measurements.build(measurement_params)
 
     if @measurement.save
-      render :show, status: :created, location: v1_user_measurement_url(@user, @measurement)
+      render :show, status: :created
+    else
+      render json: @measurement.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @measurement.update(measurement_params)
+      render :show, status: :ok
     else
       render json: @measurement.errors, status: :unprocessable_entity
     end
@@ -27,11 +34,7 @@ class V1::MeasurementsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_measurement
-    @measurement =
-      case params[:id]
-      when 'latest' then @user.measurements.order(created_at: :desc).limit(1).take
-      else Measurement.find(params[:id])
-      end
+    authorize @measurement = params[:id] == 'latest' ? current_user.measurements.order(created_at: :desc).limit(1).take : Measurement.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

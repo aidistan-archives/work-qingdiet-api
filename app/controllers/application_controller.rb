@@ -1,17 +1,25 @@
 class ApplicationController < ActionController::API
   # Include for OAuth authentication
   include ActionController::HttpAuthentication::Basic::ControllerMethods
-  # # Include for authorization
-  # include Pundit
+  # Include for authorization
+  include Pundit
+
+  attr_reader :current_app, :current_user, :current_token
 
   before_action :authenticate_access_token
 
-  # rescue_from(Pundit::NotAuthorizedError) { head :unauthorized }
+  rescue_from(Pundit::NotAuthorizedError) { head :unauthorized }
+  rescue_from(ActiveRecord::DeleteRestrictionError) { head :precondition_required }
 
-  # # Use current_token instead of current_user
-  # def pundit_user
-  #   @current_token
-  # end
+  # Use custom context instead of current_user
+  def pundit_user
+    [current_app, current_user, current_token, {
+      where: params[:where],
+      order: params[:order],
+      limit: params[:limit],
+      offset: params[:offset]
+    }]
+  end
 
   private
 
@@ -31,13 +39,5 @@ class ApplicationController < ActionController::API
     else
       head :unauthorized
     end
-  end
-
-  def set_user
-    @user =
-      case (user_id = params[:user_id] || params[:id])
-      when 'me' then @current_user
-      else User.find(user_id)
-      end
   end
 end
