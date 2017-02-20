@@ -9,7 +9,7 @@ class V1::MeasurementsController < ApplicationController
   end
 
   def create
-    @measurement = User.find(params[:user_id] || current_user.id).measurements.build(measurement_params)
+    authorize @measurement = User.find(params[:user_id] || current_user.id).measurements.build(measurement_params)
 
     if @measurement.save
       render :show, status: :created
