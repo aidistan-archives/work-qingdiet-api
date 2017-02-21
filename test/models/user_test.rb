@@ -7,7 +7,7 @@ class UserTest < ActiveSupport::TestCase
 
   test_fixtures
   test_dependent_associations(
-    destroy: [Token, Order, Combo, Address, Measurement, Requirement, Acquirement]
+    destroy: [Token, Address, Order, Combo, Measurement, Requirement, Acquirement]
   )
 
   test 'username should be uniq' do

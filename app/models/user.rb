@@ -1,13 +1,13 @@
 class User < ApplicationRecord
   include Level
 
-  has_many :tokens, dependent: :destroy
-  has_many :orders, dependent: :destroy
-  has_many :combos, dependent: :destroy
-  has_many :addresses, dependent: :destroy
-  has_many :measurements, dependent: :destroy
-  has_many :requirements, dependent: :destroy
-  has_many :acquirements, dependent: :destroy
+  has_many :tokens
+  has_many :orders
+  has_many :combos
+  has_many :addresses
+  has_many :measurements
+  has_many :requirements
+  has_many :acquirements
 
   has_secure_password
 
@@ -17,6 +17,17 @@ class User < ApplicationRecord
 
   after_save do
     destroy_invalid_tokens if changed_attributes[:level]
+  end
+
+  # To prevent ActiveRecord::DeleteRestrictionError, we have to destroy
+  # the dependencies ourselves
+  before_destroy do
+    tokens.destroy_all
+    addresses.destroy_all
+
+    orders.destroy_all
+    requirements.destroy_all
+    measurements.destroy_all
   end
 
   private

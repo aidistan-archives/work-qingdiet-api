@@ -42,7 +42,6 @@ class V1::AddressesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should destroy address' do
-    Order.where(address: @address).destroy_all
     delete v1_address_url(@address, access_token: @access_token), as: :json
     assert_response :no_content
   end

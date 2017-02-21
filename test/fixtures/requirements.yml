@@ -4,3 +4,8 @@ one:
   purpose: balance
   user: one
   measurement: one
+
+two:
+  purpose: balance
+  user: one
+  measurement: one

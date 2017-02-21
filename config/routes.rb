@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
     resources :dishes
     resources :orders
-    # resources :combo # TODO: create based on dishes and a requirement
+    resources :combos, except: [:update]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

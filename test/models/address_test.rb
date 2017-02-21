@@ -6,7 +6,6 @@ class AddressTest < ActiveSupport::TestCase
   end
 
   test_fixtures
-  test_dependent_associations(exception: Order)
 
   test 'consignee should be present' do
     @address.consignee = ' '

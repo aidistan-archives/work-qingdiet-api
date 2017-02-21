@@ -60,11 +60,11 @@ ActiveRecord::Schema.define(version: 20170115143913) do
   end
 
   create_table "combos", force: :cascade do |t|
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "user_id"
     t.integer  "order_id"
     t.integer  "requirement_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
     t.index ["order_id"], name: "index_combos_on_order_id"
     t.index ["requirement_id"], name: "index_combos_on_requirement_id", unique: true
     t.index ["user_id"], name: "index_combos_on_user_id"

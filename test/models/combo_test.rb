@@ -8,13 +8,18 @@ class ComboTest < ActiveSupport::TestCase
   test_fixtures
   test_dependent_associations(destroy: [ComboItem, Acquirement])
 
-  test 'Parent requirement should be destroyed together' do
-    assert Requirement.find(@combo.requirement.id)
+  test 'Parent requirement should have no other combos' do
+    combo_params = {
+      user: @combo.user,
+      order: @combo.order,
+      requirement: @combo.requirement
+    }
+    assert_raises(ActiveRecord::RecordNotUnique) { Combo.create(combo_params) }
 
-    @combo.destroy
-
-    assert_raises(ActiveRecord::RecordNotFound) do
-      Requirement.find(@combo.requirement.id)
-    end
+    combo_params[:requirement] = Requirement.create(
+      user: @combo.user,
+      measurement: @combo.requirement.measurement
+    )
+    assert_nothing_raised { Combo.create(combo_params) }
   end
 end
