@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :users, except: [:create, :destroy]
     resources :addresses
     resources :measurements
+    resources :requirements
 
     resources :dishes
   end

@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 20170115143913) do
   end
 
   create_table "requirements", force: :cascade do |t|
-    t.string   "purpose"
+    t.integer  "purpose"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
