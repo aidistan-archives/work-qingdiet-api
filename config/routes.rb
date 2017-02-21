@@ -10,8 +10,11 @@ Rails.application.routes.draw do
     resources :addresses
     resources :measurements
     resources :requirements
+    # resources :acquirements # TODO: calculate the nutrition acquirement of a combo
 
     resources :dishes
+    resources :orders
+    # resources :combo # TODO: create based on dishes and a requirement
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

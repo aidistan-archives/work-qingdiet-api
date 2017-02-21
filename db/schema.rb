@@ -87,11 +87,17 @@ ActiveRecord::Schema.define(version: 20170115143913) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.integer  "status",         default: 0
+    t.string   "addr_consignee"
+    t.string   "addr_mobile"
+    t.string   "addr_province"
+    t.string   "addr_city"
+    t.string   "addr_district"
+    t.string   "addr_town"
+    t.string   "addr_detail"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
-    t.integer  "address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
