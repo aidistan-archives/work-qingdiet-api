@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get  'oauth/authorize'
       post 'oauth/authorize'
       post 'oauth/access_token'
+      post 'weixin/access_token'
     end
 
     resources :users, except: [:create, :destroy]
@@ -16,6 +17,4 @@ Rails.application.routes.draw do
     resources :orders
     resources :combos, except: [:update]
   end
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

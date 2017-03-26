@@ -130,11 +130,13 @@ ActiveRecord::Schema.define(version: 20170115143913) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
+    t.string   "weixin_id"
     t.string   "password_digest"
     t.integer  "level",           default: 0
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.index ["username"], name: "index_users_on_username", unique: true
+    t.index ["weixin_id"], name: "index_users_on_weixin_id", unique: true
   end
 
 end

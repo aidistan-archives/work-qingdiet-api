@@ -44,6 +44,8 @@ group :development do
 end
 
 group :test do
+  # Stub and set expectations on HTTP requests
+  gem 'webmock'
   # Use minitest-reporters to format Minitest output
   gem 'minitest-reporters'
 end

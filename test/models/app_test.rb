@@ -23,6 +23,11 @@ class AppTest < ActiveSupport::TestCase
     assert_not @app.valid?
   end
 
+  test 'redirect_uri allowed to be nil' do
+    @app.redirect_uri = nil
+    assert @app.valid?
+  end
+
   test 'redirect_uri should be present' do
     @app.redirect_uri = ' '
     assert_not @app.valid?

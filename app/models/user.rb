@@ -11,9 +11,16 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  validates :username, uniqueness: true
+  validates :username, uniqueness: true, allow_nil: true
+  validates :weixin_id, uniqueness: true, allow_nil: true
   validates :password, presence: true, allow_nil: true
   validates :level, presence: true
+
+  # Must have one identifer at least
+  validate do
+    # Only add to :username for error display
+    errors.add :username, :blank if username.nil? && weixin_id.nil?
+  end
 
   after_save do
     destroy_invalid_tokens if changed_attributes[:level]

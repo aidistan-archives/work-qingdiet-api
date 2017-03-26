@@ -10,6 +10,13 @@ class UserTest < ActiveSupport::TestCase
     destroy: [Token, Address, Order, Combo, Measurement, Requirement, Acquirement]
   )
 
+  test 'must have an identifier' do
+    user = User.new(password: 'Pa55word')
+    assert_not user.valid?
+    user = User.new(weixin_id: 'weixin', password: 'Pa55word')
+    assert user.valid?
+  end
+
   test 'username should be uniq' do
     user = @user.dup
     assert_not user.valid?
