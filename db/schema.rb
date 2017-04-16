@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170115143913) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["client_id"], name: "index_apps_on_client_id", unique: true
+    t.index ["name"], name: "index_apps_on_name", unique: true
   end
 
   create_table "combo_items", force: :cascade do |t|
@@ -133,6 +134,7 @@ ActiveRecord::Schema.define(version: 20170115143913) do
     t.string   "weixin_id"
     t.string   "password_digest"
     t.integer  "level",           default: 0
+    t.datetime "birthday"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.index ["username"], name: "index_users_on_username", unique: true

@@ -1,4 +1,10 @@
-json.(user, :id, :username, :created_at, :updated_at)
+json.(user, :id, :username)
+
+# Format birthday as "YYYY-MM-DD"
+json.birthday user.birthday ? user.birthday.to_date.to_formatted_s : ''
 
 # Show user level for internal apps
 json.level user.level if App.levels[@current_app.level] >= App.levels['staff']
+
+# Shou timestamps
+json.(user, :created_at, :updated_at)

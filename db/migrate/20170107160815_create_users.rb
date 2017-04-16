@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :password_digest
 
       t.integer :level, default: 0
+      t.datetime :birthday
 
       t.timestamps
     end

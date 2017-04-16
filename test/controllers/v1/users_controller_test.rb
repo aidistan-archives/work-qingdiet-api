@@ -41,7 +41,8 @@ class V1::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update user' do
-    patch v1_user_url(@user, access_token: @access_token), as: :json
+    patch v1_user_url(@user, access_token: @access_token),
+      params: { birthday: Time.now }, as: :json
     assert_response :success
   end
 
