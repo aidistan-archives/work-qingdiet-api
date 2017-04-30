@@ -3,7 +3,7 @@ class V1::Login::OauthController < ApplicationController
   before_action :authenticate_app_with_http_basic, only: :access_token
 
   def authorize
-    if %w(code token).include?(params[:grant_type]) && (@app = App.find_by(client_id: params[:client_id]))
+    if %w[code token].include?(params[:grant_type]) && (@app = App.find_by(client_id: params[:client_id]))
       if request.get?
         render layout: 'layouts/application'
       elsif create_token_with_credentials

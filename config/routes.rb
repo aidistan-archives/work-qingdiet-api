@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       post 'weixin/access_token'
     end
 
-    resources :users, except: [:create, :destroy]
+    resources :users, except: %i[create destroy]
     resources :addresses
     resources :measurements
     resources :requirements
@@ -15,6 +15,6 @@ Rails.application.routes.draw do
 
     resources :dishes
     resources :orders
-    resources :combos, except: [:update]
+    resources :combos, except: %i[update]
   end
 end

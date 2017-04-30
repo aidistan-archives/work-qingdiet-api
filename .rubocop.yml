@@ -1,6 +1,8 @@
 # We should and could handle them ourselves.
 Metrics/LineLength:
   Enabled: false
+Metrics/BlockLength:
+  Enabled: false
 Metrics/MethodLength:
   Enabled: false
 Metrics/AbcSize:

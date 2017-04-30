@@ -1,5 +1,5 @@
 class V1::AddressesController < ApplicationController
-  before_action :set_address, only: [:show, :update, :destroy]
+  before_action :set_address, only: %i[show update destroy]
 
   def index
     @addresses = policy_scope(Address).order(last_used_at: :desc)

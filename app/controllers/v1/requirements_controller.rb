@@ -1,5 +1,5 @@
 class V1::RequirementsController < ApplicationController
-  before_action :set_requirement, only: [:show, :update, :destroy]
+  before_action :set_requirement, only: %i[show update destroy]
 
   def index
     @requirements = policy_scope(Requirement)

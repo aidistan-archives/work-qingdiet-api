@@ -1,5 +1,5 @@
 class V1::OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :update, :destroy]
+  before_action :set_order, only: %i[show update destroy]
 
   def index
     @orders = policy_scope(Order)

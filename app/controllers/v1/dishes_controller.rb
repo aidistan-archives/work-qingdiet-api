@@ -1,5 +1,5 @@
 class V1::DishesController < ApplicationController
-  before_action :set_dish, only: [:show, :update, :destroy]
+  before_action :set_dish, only: %i[show update destroy]
 
   def index
     @dishes = Dish.all

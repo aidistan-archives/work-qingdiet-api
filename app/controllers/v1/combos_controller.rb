@@ -1,5 +1,5 @@
 class V1::CombosController < ApplicationController
-  before_action :set_combo, only: [:show, :update, :destroy]
+  before_action :set_combo, only: %i[show update destroy]
 
   def index
     @combos = policy_scope(Combo)
