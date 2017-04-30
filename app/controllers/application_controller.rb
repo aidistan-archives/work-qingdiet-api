@@ -35,7 +35,7 @@ class ApplicationController < ActionController::API
       @current_user = token.user
       @current_token = token
 
-      token.update_attributes(last_used_at: Time.now, last_used_ip: request.remote_ip)
+      token.update_columns(last_used_at: Time.now, last_used_ip: request.remote_ip)
     else
       head :unauthorized
     end

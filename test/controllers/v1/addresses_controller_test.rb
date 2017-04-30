@@ -36,9 +36,9 @@ class V1::AddressesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update address' do
     patch v1_address_url(@address, access_token: @access_token),
-      params: { name: 'name' }, as: :json
+      params: { consignee: 'tester' }, as: :json
     assert_response :success
-    assert_equal 'name', JSON.parse(response.body)['name']
+    assert_equal 'tester', JSON.parse(response.body)['consignee']
   end
 
   test 'should destroy address' do

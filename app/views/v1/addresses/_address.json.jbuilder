@@ -1,6 +1,6 @@
 json.(
   address, :id,
-  :name, :consignee, :mobile,
+  :consignee, :mobile,
   :province, :city, :district, :town, :detail,
   :created_at, :updated_at
 )

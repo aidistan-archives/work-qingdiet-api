@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20170115143913) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "name"
     t.string   "consignee"
     t.string   "mobile"
     t.string   "province"

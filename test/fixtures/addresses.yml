@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: FIT 楼
   consignee: 谭先生
   province: 北京市
   city: 海淀区
@@ -12,7 +11,6 @@ one:
   user: one
 
 two:
-  name: 生物技术馆
   consignee: 黄女士
   province: 北京市
   city: 海淀区

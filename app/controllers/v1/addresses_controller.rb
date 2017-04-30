@@ -40,7 +40,7 @@ class V1::AddressesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def address_params
     params.require(:address).permit(
-      :name, :consignee, :mobile,
+      :consignee, :mobile,
       :province, :city, :district, :town, :detail
     )
   end
