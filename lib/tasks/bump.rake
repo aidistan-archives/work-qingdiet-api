@@ -13,7 +13,7 @@ namespace :bump do
   end
 
   def load_constants
-    @version = [:major, :minor, :patch].zip(QingDiet::VERSION.split('.').map(&:to_i)).to_h
+    @version = %i[major minor patch].zip(QingDiet::VERSION.split('.').map(&:to_i)).to_h
     @version.define_singleton_method(:to_s, -> { values.join('.') })
     @vertime = Time.now.to_s[0...10]
     @vername = QingDiet::VERNAME
@@ -42,13 +42,18 @@ namespace :bump do
 
   desc 'Create a commit bumping the minor number'
   task :minor do
-    bump { @version[:minor] += 1 }
+    bump do
+      @version[:minor] += 1
+      @version[:patch]  = 0
+    end
   end
 
   desc 'Create a commit bumping the major number'
   task :major do
     bump do
       @version[:major] += 1
+      @version[:minor]  = 0
+      @version[:patch]  = 0
 
       print 'A new version name is required: '
       @vername = STDIN.gets.chomp
