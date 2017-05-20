@@ -14,8 +14,8 @@ class V1::Login::WeixinController < ApplicationController
     if res['errcode']
       head :unauthorized
     else
-      user = User.find_by(weixin_id: res['openid'])
-      user = User.create(weixin_id: res['openid'], password: res['openid']) unless user
+      user = User.find_by(weixin_id: res['openid']) ||
+             User.create(weixin_id: res['openid'], password: res['openid'])
       render json: user.tokens.create(app: App[:weixin], expires_in: res['expire_in'], level: 'standard').to_access_token
     end
   end
