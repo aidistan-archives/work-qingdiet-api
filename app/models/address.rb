@@ -3,7 +3,6 @@ class Address < ApplicationRecord
 
   validates :consignee, presence: true
   validates :mobile, presence: true, mobile: true
-
   validates :province, presence: true
   validates :city, presence: true
   validates :detail, presence: true

@@ -21,12 +21,10 @@ class V1::MeasurementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create measurement' do
-    measurement_params = {
-      age: @measurement.age,
-      height: @measurement.height,
-      weight: @measurement.weight,
-      activity_level: @measurement.activity_level
-    }
+    measurement_params = {}
+    %i[gender age height weight activity_level].each do |sym|
+      measurement_params[sym] = @measurement.send(sym)
+    end
 
     assert_difference('@user.measurements.count') do
       post v1_measurements_url(access_token: @access_token), as: :json,

@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :requirements
   has_many :acquirements
 
+  enum gender: { unknown_gender: 0, male: 1, female: 2 }
   has_secure_password
 
   validates :username, uniqueness: true, allow_nil: true

@@ -8,6 +8,11 @@ class MeasurementTest < ActiveSupport::TestCase
   test_fixtures
   test_dependent_associations(exception: Requirement)
 
+  test 'gender should be present' do
+    @measurement.gender = nil
+    assert_not @measurement.valid?
+  end
+
   test 'age should be greater than 0' do
     @measurement.age = 0
     assert_not @measurement.valid?

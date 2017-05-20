@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  gender: male
   age: 25
   height: 180
   weight: 75
@@ -8,6 +9,7 @@ one:
   user: one
 
 two:
+  gender: female
   age: 32
   height: 162
   weight: 56

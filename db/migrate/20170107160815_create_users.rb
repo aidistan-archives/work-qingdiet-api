@@ -4,8 +4,9 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :username
       t.string :weixin_id
       t.string :password_digest
-
       t.integer :level, default: 0
+
+      t.integer :gender, default: 0
       t.datetime :birthday
 
       t.timestamps

@@ -14,6 +14,6 @@ module Level
       standard: 0,
       staff: 5,
       super: 9
-    }, _suffix: :level
+    }, _suffix: true
   end
 end
